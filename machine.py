@@ -53,6 +53,7 @@ class Machine:
             self.spin_time = pygame.time.get_ticks()
             self.currPlayer.place_bet()
             self.machine_balance += self.currPlayer.bet_size
+            print(self.currPlayer.get_data())
             self.currPlayer.last_payout = None
 
     def draw_reels(self, delta_time):
@@ -103,6 +104,7 @@ class Machine:
     def pay_player(self, win_data, curr_player):
         multiplier = 0
         spin_payout = 0
+        print(win_data)
         for v in win_data.values():
             multiplier += len(v[1])
         spin_payout = (multiplier * curr_player.bet_size)

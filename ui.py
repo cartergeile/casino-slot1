@@ -6,8 +6,14 @@ class UI:
     def __init__(self, player):
         self.player = player
         self.display_surface = pygame.display.get_surface()
-        self.font, self.bet_font = pygame.font.Font(UI_FONT, UI_FONT_SIZE), pygame.font.Font(UI_FONT, UI_FONT_SIZE)
-        self.win_font = pygame.font.Font(UI_FONT, WIN_FONT_SIZE)
+        try:
+            self.font, self.bet_font = pygame.font.Font(UI_FONT, UI_FONT_SIZE), pygame.font.Font(UI_FONT, UI_FONT_SIZE)
+            self.win_font = pygame.font.Font(UI_FONT, WIN_FONT_SIZE)
+        except:
+            print("Error loading font!")
+            print(f"Currently, the UI_FONT variable is set to {UI_FONT}")
+            print("Does the file exist?")
+            quit()
         self.win_text_angle = random.randint(-4, 4)
 
     def display_info(self):
@@ -16,11 +22,11 @@ class UI:
         # Balance and bet size
         balance_surf = self.font.render("Balance: $" + player_data['balance'], True, TEXT_COLOR, None)
         x, y = 20, self.display_surface.get_size()[1] - 30
-        balance_rect = balance_surf.get_rect(bottomleft = (x,y))
+        balance_rect = balance_surf.get_rect(bottomleft = (x, y))
 
         bet_surf = self.bet_font.render("Wager: $" + player_data['bet_size'], True, TEXT_COLOR, None)
         x = self.display_surface.get_size()[0] - 20
-        bet_rect = bet_surf.get_rect(bottomright = (x,y))
+        bet_rect = bet_surf.get_rect(bottomright = (x, y))
 
         # Draw player data
         pygame.draw.rect(self.display_surface, False, balance_rect)
