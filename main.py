@@ -11,8 +11,8 @@ class Game:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption('Slot Machine Demo')
         self.clock = pygame.time.Clock()
-        self.bg_image = pygame.image.load(BG_IMAGE_PATH)
-
+        self.bg_image = pygame.image.load(BG_IMAGE_PATH).convert_alpha()
+        self.grid_image = pygame.image.load(GRID_IMAGE_PATH).convert_alpha()
         # To do: create machine class
         self.machine = Machine()
         self.delta_time = 0
@@ -39,6 +39,7 @@ class Game:
             pygame.display.update()
             self.screen.blit(self.bg_image, (0, 0))
             self.machine.update(self.delta_time)
+            self.screen.blit(self.grid_image, (0, 0))
             self.clock.tick(FPS)
 
 if __name__ == '__main__':
